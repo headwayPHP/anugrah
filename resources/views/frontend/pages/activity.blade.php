@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 position-relative">
-                    <h3 class="breadcrumb-title text-white">Activities</h3>
+                    <h3 class="breadcrumb-title text-black">Activities</h3>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
                         <li class="breadcrumb-item"><a href="{{route('front.home')}}">Home</a></li>

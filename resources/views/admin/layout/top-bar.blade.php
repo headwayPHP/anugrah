@@ -3,7 +3,7 @@
             data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
             aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-    <a class="navbar-brand me-1 me-sm-3" href="index-2.html">
+    <a class="navbar-brand me-1 me-sm-3" href="{{route('front.home')}}">
         <div class="d-flex align-items-center"><img class="me-2"
                                                     src="{{asset('assets/images/logo/logo2.png')}}"
                                                     alt="" width="40"/><span class="font-sans-serif"></span>
@@ -488,7 +488,7 @@
             data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
             aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-    <a class="navbar-brand me-1 me-sm-3" href="index-2.html">
+    <a class="navbar-brand me-1 me-sm-3" href="{{route('front.home')}}">
         <div class="d-flex align-items-center"><img class="me-2"
                                                     src="{{asset('assets/images/logo/logo2.png')}}"
                                                     alt="" width="40"/><span class="font-sans-serif">Anugrah Pathshala</span>
@@ -502,7 +502,7 @@
                 <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                      aria-labelledby="dashboards">
                     <div class="bg-white dark__bg-1000 rounded-3 py-2"><a
-                            class="dropdown-item link-600 fw-medium" href="index-2.html">Default</a><a
+                            class="dropdown-item link-600 fw-medium" href="{{route('front.home')}}">Default</a><a
                             class="dropdown-item link-600 fw-medium" href="dashboard/analytics.html">Analytics</a><a
                             class="dropdown-item link-600 fw-medium" href="dashboard/crm.html">CRM</a><a
                             class="dropdown-item link-600 fw-medium" href="dashboard/e-commerce.html">E

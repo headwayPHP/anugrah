@@ -27,6 +27,7 @@ session(['colour' => $colour->value]);
     <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Main Style CSS -->
     {{--    <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">--}}
     <style>
@@ -41,6 +42,7 @@ session(['colour' => $colour->value]);
             transition: background-color 5000s ease-in-out 0s;
         }
     </style>
+
     <link href="{{ asset('assets/css/style.min.css?v=' . time()) }}" rel="stylesheet">
 
 

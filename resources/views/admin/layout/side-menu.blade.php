@@ -6,7 +6,7 @@
                     data-bs-toggle="collapse" data-bs-target="#navbarDoubleTop"
                     aria-controls="navbarDoubleTop" aria-expanded="false" aria-label="Toggle Navigation">
                 <span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand me-1 me-sm-3" href="index-2.html">
+            <a class="navbar-brand me-1 me-sm-3" href="{{route('front.home')}}">
                 <div class="d-flex align-items-center"><img class="me-2"
                                                             src="assets/img/icons/spot-illustrations/falcon.png"
                                                             alt="" width="40"/><span
@@ -525,7 +525,7 @@
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                          aria-labelledby="dashboards">
                         <div class="bg-white dark__bg-1000 rounded-3 py-2"><a
-                                class="dropdown-item link-600 fw-medium" href="index-2.html">Default</a>
+                                class="dropdown-item link-600 fw-medium" href="{{route('front.home')}}">Default</a>
                                     class="badge rounded-pill ms-2 badge-subtle-success">New</span></a>
                         </div>
                     </div>
@@ -1094,7 +1094,7 @@
                     data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
         </div>
-        <a class="navbar-brand" href="index-2.html">
+        <a class="navbar-brand" href="{{route('front.home')}}">
             <div class="d-flex align-items-center py-3"><img class="me-2"
                                                              src="{{asset('assets/images/logo/logo2.png')}}"
                                                              alt="" width="40"/><span
@@ -1194,7 +1194,7 @@
             data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard"
             aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                 class="toggle-line"></span></span></button>
-    <a class="navbar-brand me-1 me-sm-3" href="index-2.html">
+    <a class="navbar-brand me-1 me-sm-3" href="{{route('front.home')}}">
         <div class="d-flex align-items-center"><img class="me-2"
                                                     src="{{asset('assets/images/logo/logo2.png')}}"
                                                     alt="" width="40"/><span
@@ -1208,7 +1208,7 @@
                 <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                      aria-labelledby="dashboards">
                     <div class="bg-white dark__bg-1000 rounded-3 py-2"><a
-                            class="dropdown-item link-600 fw-medium" href="index-2.html">Default</a>
+                            class="dropdown-item link-600 fw-medium" href="{{route('front.home')}}">Default</a>
                     </div>
                 </div>
             </li>

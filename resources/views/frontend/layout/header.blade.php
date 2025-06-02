@@ -88,7 +88,12 @@
                             <i></i>
                         </div>
                     </div>
-                    <button class="btn single-by-ticket-btn"><a href="{{route('regRequestPage')}}">Register</a></button>
+{{--                    <button class="btn single-by-ticket-btn"><a href="{{route('regRequestPage')}}">Register</a></button>--}}
+
+                    <div class="ht-btn-area ">
+                        <a href="{{route('regRequestPage')}}" class="hero-btn">Register</a>
+                    </div>
+
                 </div>
             </div>
         </div>

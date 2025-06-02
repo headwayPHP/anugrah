@@ -3,15 +3,15 @@
 @section('content')
 
     <!-- breadcrumb-area start -->
-    <div class="breadcrumb-area bg-overlay-black-4">
+    <div class="breadcrumb-area bg-overlay-black-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 position-relative">
-                    <h3 class="breadcrumb-title text-white">{{ $about->title }}</h3>
+                    <h3 class="breadcrumb-title text-black">{{ $about->title }}</h3>
                     <!-- breadcrumb-list start -->
-                    <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">{{ $about->title }}</li>
+                    <ul class="breadcrumb-list ">
+                        <li class="breadcrumb-item text-black"><a href="{{ route('front.home') }}">Home</a></li>
+                        <li class="breadcrumb-item text-black active">{{ $about->title }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>

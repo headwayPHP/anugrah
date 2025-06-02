@@ -1,13 +1,13 @@
 @php
-    $address = \App\Models\Setting::where('id',7)->first();
-    $mobile = \App\Models\Setting::where('id',8)->first();
-    $email = \App\Models\Setting::where('id',9)->first();
+$address = \App\Models\Setting::where('id',7)->first();
+$mobile = \App\Models\Setting::where('id',8)->first();
+$email = \App\Models\Setting::where('id',9)->first();
 
-       $instagram = \App\Models\Setting::where('id',2)->first();
-    $facebook = \App\Models\Setting::where('id',3)->first();
-    $youtube = \App\Models\Setting::where('id',4)->first();
+$instagram = \App\Models\Setting::where('id',2)->first();
+$facebook = \App\Models\Setting::where('id',3)->first();
+$youtube = \App\Models\Setting::where('id',4)->first();
 @endphp
-    <!--========== Footer Area Start ==========-->
+<!--========== Footer Area Start ==========-->
 <footer class="footer-area bg-footer">
     <div class="footer-top section-space--ptb_80 section-pb text-white">
         <div class="container">
@@ -30,18 +30,17 @@
                                 </li>
                                 <li>
                                     <i class="fa fa-phone" aria-hidden="true" style="margin-right: 8px;"></i>
-                                    {{$mobile->value}}
+                                    <a href="tel:{{$mobile->value}}">{{$mobile->value}}</a>
+
                                 </li>
                             </ul>
 
                             <div class="social-links mt-3">
                                 <p class="mb-2">Follow Us</p>
-                                <a href="{{$instagram->value}}" target="_blank"
-                                   style="margin-right: 10px;">
+                                <a href="{{$instagram->value}}" target="_blank" style="margin-right: 10px;">
                                     <i class="fa fa-instagram" aria-hidden="true"></i>
                                 </a>
-                                <a href="{{$facebook->value}}" target="_blank"
-                                   style="margin-right: 10px;">
+                                <a href="{{$facebook->value}}" target="_blank" style="margin-right: 10px;">
                                     <i class="fa fa-facebook" aria-hidden="true"></i>
                                 </a>
                                 <a href="{{$youtube->value}}" target="_blank">
@@ -76,11 +75,11 @@
                         </div>
                         <div class="footer-contents">
                             <ul>
-                                <li>Sun Rise: 6:00 am</li>
-                                <li>Sun Sat: 5:50 pm</li>
-                                <li>Start Time: 9:00 am</li>
-                                <li>End Time: 11.00 pm</li>
-                                <li>Lunch: 01:30 pm</li>
+                                <li>Mangal Aarti: 4:30 am</li>
+                                <li>Shringar Aarti: 7:30 am</li>
+                                <li>Rajbhog Aarti: 12:30 pm</li>
+                                <li>Utthapan Aarti: 4.00 pm</li>
+                                <li>Sandhya Aarti: 6:30 pm</li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +108,7 @@
                 <!--                                <h6>Related Links</h6>-->
                 <!--                            </div>-->
                 <!--                            <div class="footer-logo mb-15">-->
-                <!--                                <a href="index-2.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>-->
+                <!--                                <a href="{{route('front.home')}}"><img src="assets/images/logo/footer-logo.png" alt=""></a>-->
                 <!--                            </div>-->
                 <!--                            <div class="footer-contents">-->
                 <!--                                <p> Subscribe to our Newsletter & stay update. </p>-->
@@ -146,4 +145,3 @@
     </div>
 </footer>
 <!--==========// Footer Area End ==========-->
-

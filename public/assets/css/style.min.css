@@ -703,8 +703,9 @@ input[type=checkbox] {
     padding-bottom: 131px;
     background-size: cover;
     /*background-image: url(../images/bg/breadcrumb-01.png)*/
-    background-image: url('../images/banners/taitai2.png');
+    /*background-image: url('../images/banners/taitai2.png');*/
 }
+
 
 @media only screen and (max-width: 767px), only screen and (min-width: 768px)and (max-width: 991px), only screen and (min-width: 992px)and (max-width: 1199px) {
     .breadcrumb-area {
@@ -728,7 +729,7 @@ input[type=checkbox] {
     top: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, .4);
+    /*background: rgba(0, 0, 0, .4);*/
     content: "";
     border-radius: 5px
 }
@@ -736,8 +737,18 @@ input[type=checkbox] {
 .breadcrumb-item + .breadcrumb-item::before {
     display: inline-block;
     padding-right: .5rem;
-    color: #fff;
+    color: var(--primary);
     content: "/"
+}
+.breadcrumb-item {
+    color: var(--primary) !important;
+}
+.breadcrumb-item a {
+    color: black !important;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary) !important;
 }
 
 .breadcrumb-list {
@@ -751,7 +762,7 @@ input[type=checkbox] {
     letter-spacing: 2px;
     line-height: 1.58;
     text-transform: uppercase;
-    color: #fff
+    color: black;
 }
 
 .breadcrumb-list li a {
@@ -781,9 +792,11 @@ input[type=checkbox] {
 }
 
 .breadcrumb-list li.active {
-    color: #fff
+    color: black;
 }
-
+.breadcrumb-title {
+    color: var(--primary) !important;
+}
 .breadcrumb-area--bg-two {
     background-repeat: no-repeat;
     background-position: center center;
@@ -2092,7 +2105,7 @@ input[type=checkbox] {
     transition: all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
     -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .1);
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .1);
-    background: #fff8f1
+    background: #fff
 }
 
 .header-right {
@@ -2112,21 +2125,21 @@ input[type=checkbox] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
+    -webkit-justify-content: flex-start;
     -ms-flex-pack: end;
-    justify-content: flex-end
+    justify-content: flex-start
 }
 
-.header__logo {
-    -webkit-flex-basis: 20%;
-    -ms-flex-preferred-size: 20%;
-    flex-basis: 20%
-}
+/*.header__logo {*/
+/*    -webkit-flex-basis: 20%;*/
+/*    -ms-flex-preferred-size: 20%;*/
+/*    flex-basis: 20%;*/
+/*}*/
 
 .header__logo {
-    -ms-flex-preferred-size: 20%;
-    -webkit-flex-basis: 20%;
-    flex-basis: 20%;
+    -ms-flex-preferred-size: 15%;
+    -webkit-flex-basis: 15%;
+    flex-basis: 15%;
     padding: 14px 0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2142,11 +2155,11 @@ input[type=checkbox] {
 }
 
 .logo img, .footer-logo img {
-    max-width: 50px;
+    max-width: 80px;
 }
 
 .header-area {
-    background: #fff8f1
+    background: #fff;
 }
 
 .header-btn .btn-default {
@@ -2169,14 +2182,14 @@ input[type=checkbox] {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    align-items:center;
-    justify-content:space-between;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navigation-menu {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navigation-menu > ul > li {
@@ -2206,14 +2219,14 @@ input[type=checkbox] {
     color: #000;
     padding: 25px 2px;
     position: relative;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    /*font-weight: 500;*/
     line-height: 1.18
 }
 
 .navigation-menu > ul > li.has-children > a {
     position: relative;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .navigation-menu > ul > li.has-children--multilevel-submenu {
@@ -3100,7 +3113,7 @@ input[type=checkbox] {
     /*background: url(../images/hero/christian-hero-bg-02.png);*/
     background-size: cover;
     background-position: center
-    background-repeat:no-repeat !important;
+    background-repeat: no-repeat !important;
 }
 
 .hero-style-02 {
@@ -3332,17 +3345,22 @@ input[type=checkbox] {
 }
 
 .hero-btn {
-    border: 2px solid #ddd;
-    padding: 5px 40px;
-    background: #fff;
-    color: #333;
-    border-radius: 25px
+
+    padding: 8px 20px;
+    font-size: 18px;
+    background: var(--primary);
+    font-weight: 600;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid transparent; /* 👈 set a default border */
+    transition: all 0.3s ease; /* optional: smooth transition */
 }
 
 .hero-btn:hover {
-    background: var(--primary);
-    color: #fff;
-    border: 2px solid var(--primary)
+    border: 1px solid var(--primary);
+    background: #fff;
+    color: var(--primary);
+    /*border: 2px solid var(--primary)*/
 }
 
 .hero-boder-top {
@@ -3364,8 +3382,8 @@ input[type=checkbox] {
 .single-service-wrap .service-image a img {
     width: 100%;
     aspect-ratio: 1 / 1; /* Makes width and height equal (square) */
-    object-fit: cover;   /* Optional: ensures the image covers the square without distortion */
-    display: block;      /* Removes unwanted whitespace below image */
+    object-fit: cover; /* Optional: ensures the image covers the square without distortion */
+    display: block; /* Removes unwanted whitespace below image */
 }
 
 .service-content {
@@ -3399,7 +3417,14 @@ input[type=checkbox] {
 }
 
 .single-activities-wrap {
-    margin-top: 30px
+    margin-top: 30px;
+    padding-bottom: 30px;;
+}
+
+.single-activities-wrap:hover {
+    /* transform: translateY(-2px); */
+    border-radius: 25px;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
 
 .activities-imgaes {
@@ -3409,8 +3434,9 @@ input[type=checkbox] {
 .activities-imgaes img {
     width: 100%;
     aspect-ratio: 1 / 1; /* Makes width and height equal (square) */
-    object-fit: cover;   /* Optional: ensures the image covers the square without distortion */
-    display: block;      /* Removes unwanted whitespace below image */
+    object-fit: cover; /* Optional: ensures the image covers the square without distortion */
+    display: block; /* Removes unwanted whitespace below image */
+    border-radius:25px;
 
 }
 
@@ -3427,25 +3453,25 @@ input[type=checkbox] {
 
 .activities-content .activities-title {
     position: relative;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     padding-bottom: 20px;
     position: relative;
     display: inline-block;
     font-weight: 600
 }
 
-.activities-content .activities-title::after {
-    position: absolute;
-    bottom: 0;
-    content: "";
-    height: 4px;
-    width: 75px;
-    background: var(--primary);
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%)
-}
+/*.activities-content .activities-title::after {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    content: "";*/
+/*    height: 4px;*/
+/*    width: 75px;*/
+/*    background: var(--primary);*/
+/*    left: 50%;*/
+/*    -webkit-transform: translateX(-50%);*/
+/*    -ms-transform: translateX(-50%);*/
+/*    transform: translateX(-50%)*/
+/*}*/
 
 .single-foundation {
     position: relative;
@@ -3546,7 +3572,7 @@ input[type=checkbox] {
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    min-height:345px;
+    min-height: 345px;
 }
 
 .single-spiritual-wrap .spitiutal-title {
@@ -3574,7 +3600,7 @@ input[type=checkbox] {
     z-index: 0
 }
 
-.service-top-banner::after {
+/* .service-top-banner::after {
     content: "";
     position: absolute;
     top: 0;
@@ -3588,9 +3614,9 @@ input[type=checkbox] {
     background-repeat: no-repeat;
     left: auto;
     z-index: -1
-}
+} */
 
-.service-top-banner::before {
+/* .service-top-banner::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -3603,7 +3629,7 @@ input[type=checkbox] {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom
-}
+} */
 
 .mision-list li {
     margin-bottom: 10px
@@ -4214,7 +4240,8 @@ input[type=checkbox] {
     background: #f8f4eb;
     border: 2px solid #e5dede;
     border-radius: 25px;
-    padding: 6px 40px
+    padding: 6px 40px;
+    margin-left: 1em;
 }
 
 .single-by-ticket-btn:hover {
@@ -4280,7 +4307,7 @@ input[type=checkbox] {
 }
 
 .about-us-btn:hover {
-    color: #333 !important;
+    color: #fff !important;
     background: var(--primary)
 }
 
@@ -4489,12 +4516,41 @@ input[type=checkbox] {
     background-color: var(--primary);
 }
 
-.facebook {
+/* .facebook {
     background: #3B5998;
     color: white;
 }
 
 .instagram {
+    background: rgba(255, 48, 64, 1);
+    color: white;
+}
+
+.twitter {
+    background: #55ACEE;
+    color: white;
+} */
+
+.facebook, .instagram, .twitter, .google, .linkedin, .youtube {
+    background: var(--primary);
+    color: #fff;
+}
+
+.facebook:hover, .instagram:hover, .twitter:hover, .google:hover, .linkedin:hover, .youtube:hover {
+    color: var(--primary);
+    background: #fff !important;
+    & i {
+        color: var(--primary) !important;
+    }
+}
+.instagram {
+    border-top-right-radius: 20px;
+}
+.youtube {
+    border-bottom-right-radius: 20px;
+}
+
+/* .instagram {
     background: rgba(255, 48, 64, 1);
     color: white;
 }
@@ -4517,7 +4573,7 @@ input[type=checkbox] {
 .youtube {
     background: #bb0000;
     color: white;
-}
+} */
 
 
 /* Social Videos Section */
@@ -4571,8 +4627,9 @@ input[type=checkbox] {
 }
 
 .fa-instagram {
-    color: #fff !important;
+    color: var(--secondary) !important;
 }
+
 
 .fa-youtube {
     color: #fff !important;
@@ -4628,22 +4685,18 @@ input[type=checkbox] {
 }
 
 .square-img-wrapper {
-    width: 400px;         /* adjust size as needed */
-    aspect-ratio: 1 / 1;  /* keep it square */
-    overflow: hidden;     /* hide overflow from img */
-    border-radius: 8px;   /* optional: rounded corners */
+    width: 400px; /* adjust size as needed */
+    aspect-ratio: 1 / 1; /* keep it square */
+    overflow: hidden; /* hide overflow from img */
+    border-radius: 8px; /* optional: rounded corners */
 }
 
 .square-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;    /* keeps image nicely cropped */
+    object-fit: cover; /* keeps image nicely cropped */
     display: block;
 }
-
-
-
-
 
 
 .newsletter-flex {
@@ -4667,5 +4720,35 @@ input[type=checkbox] {
     .newsletter-title h4 {
         font-size: 18px;
     }
+
+
 }
 
+@media (max-width: 1003px) {
+    .btn.single-by-ticket-btn {
+        display: none;
+    }
+}
+
+
+[class^="breadcrumb-area"] {
+
+    background-image: url('../images/banners/taitai2.png');
+    text-align: center;
+}
+
+.bg-overlay-black-0 {
+    /*background: unset;*/
+}
+
+
+
+
+.slider-nav-btn {
+    background-color: var(--primary);
+    color: #fff;
+}
+.slider-nav-btn:hover {
+    background-color: #fff;
+    color: var(--primary);
+}
