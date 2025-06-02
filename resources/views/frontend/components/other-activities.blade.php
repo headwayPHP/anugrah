@@ -13,42 +13,37 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
             </div>
         </div>
 
-        <!-- Slider Container -->
-        <div class="activities-slider-container position-relative">
-            <!-- Navigation Buttons -->
+        <!-- External Navigation Buttons -->
+        <div class="text-center mb-4">
             <button class="slider-nav-btn prev-btn" aria-label="Previous activities">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
+                &larr; Prev
             </button>
-
-            <button class="slider-nav-btn next-btn" aria-label="Next activities">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
+            <button class="slider-nav-btn next-btn ms-3" aria-label="Next activities">
+                Next &rarr;
             </button>
+        </div>
 
-            <!-- Slider Track -->
+        <!-- Slider Container -->
+        <div class="activities-slider-container">
             <div class="activities-slider-track">
                 @foreach($activities as $activity)
                 <div class="slider-slide">
                     <!-- Single Activities Start -->
                     <div class="single-activities-wrap">
-                        <a href="{{route('front.activity.details', $activity->id)}}" class="activities-imgaes">
-                            <img src="{{asset($activity->featured_image)}}" class="img-fluid"
+                        <a href="{{ route('front.activity.details', $activity->id) }}" class="activities-imgaes">
+                            <img src="{{ asset($activity->featured_image) }}" class="img-fluid"
                                 alt="{{ $activity->title }}">
                         </a>
                         <div class="activities-content text-center">
-                            <a href="{{route('front.activity.details', $activity->id)}}">
+                            <a href="{{ route('front.activity.details', $activity->id) }}">
                                 <h4 class="activities-title">{{ \Illuminate\Support\Str::limit($activity->title, 19) }}
                                 </h4>
                             </a>
                             <p>{{ \Illuminate\Support\Str::limit($activity->content, 100) }}</p>
                         </div>
                         <div class="ht-btn-area text-center mt-3">
-                            <a href="{{route('front.activity.details', $activity->id)}}" class="hero-btn">Read more</a>
+                            <a href="{{ route('front.activity.details', $activity->id) }}" class="hero-btn">Read
+                                more</a>
                         </div>
                     </div>
                     <!--// Single Activities End -->
@@ -61,10 +56,7 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
 <!-- ======== Others Activities Area End ========== -->
 
 <style>
-    /* Slider Styles */
     .activities-slider-container {
-        position: relative;
-        padding: 0 40px;
         overflow: hidden;
     }
 
@@ -81,43 +73,37 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
     }
 
     .slider-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        /* background-color: #4a6fdc; */
-        /* Custom button color */
-        /* color: white; */
+        background-color: {
+                {
+                session('colour', '#f2b263')
+            }
+        }
+
+        ;
+        color: #fff;
+        padding: 8px 18px;
         border: none;
+        border-radius: 5px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        transition: all 0.3s ease;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
     }
 
     .slider-nav-btn:hover {
-        /* background-color: #3a5bc7; */
-        /* Darker shade on hover */
+        background-color: darken({
+                {
+                session('colour', '#f2b263')
+            }
+        }
+
+        , 10%);
     }
 
-    .slider-nav-btn svg {
-        width: 20px;
-        height: 20px;
+    .slider-nav-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 
-    .prev-btn {
-        left: 0;
-    }
-
-    .next-btn {
-        right: 0;
-    }
-
-    /* Responsive Styles */
     @media (max-width: 992px) {
         .slider-slide {
             flex: 0 0 calc(100% / 2 - 15px);
@@ -128,31 +114,19 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
         .slider-slide {
             flex: 0 0 100%;
         }
-
-        .activities-slider-container {
-            padding: 0 30px;
-        }
-
-        .slider-nav-btn {
-            width: 30px;
-            height: 30px;
-        }
     }
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const track = document.querySelector('.activities-slider-track');
         const slides = document.querySelectorAll('.slider-slide');
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
 
-        if (!track || !slides.length || !prevBtn || !nextBtn) return;
-
         let currentIndex = 0;
         const slideCount = slides.length;
 
-        // Calculate how many slides to move based on visible slides
         function getVisibleSlidesCount() {
             if (window.innerWidth < 768) return 1;
             if (window.innerWidth < 992) return 2;
@@ -161,9 +135,8 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
 
         function updateSlider() {
             const visibleSlides = getVisibleSlidesCount();
-            const slideWidth = slides[0].getBoundingClientRect().width + 20; // including gap
+            const slideWidth = slides[0].getBoundingClientRect().width + 20;
 
-            // Handle boundaries
             if (currentIndex < 0) currentIndex = 0;
             if (currentIndex > slideCount - visibleSlides) {
                 currentIndex = slideCount - visibleSlides;
@@ -171,29 +144,21 @@ $activities = \App\Models\Activity::where('status','1')->limit(10)->get();
 
             track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-            // Disable buttons at boundaries
             prevBtn.disabled = currentIndex === 0;
             nextBtn.disabled = currentIndex >= slideCount - visibleSlides;
         }
 
-        prevBtn.addEventListener('click', function() {
-            const visibleSlides = getVisibleSlidesCount();
-            currentIndex = Math.max(0, currentIndex - visibleSlides);
+        prevBtn.addEventListener('click', function () {
+            currentIndex -= getVisibleSlidesCount();
             updateSlider();
         });
 
-        nextBtn.addEventListener('click', function() {
-            const visibleSlides = getVisibleSlidesCount();
-            currentIndex = Math.min(slideCount - visibleSlides, currentIndex + visibleSlides);
+        nextBtn.addEventListener('click', function () {
+            currentIndex += getVisibleSlidesCount();
             updateSlider();
         });
 
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            updateSlider();
-        });
-
-        // Initialize slider
+        window.addEventListener('resize', updateSlider);
         updateSlider();
     });
 </script>
