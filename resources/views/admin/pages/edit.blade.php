@@ -17,8 +17,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Content</label>
-                <textarea name="content" class="form-control" id="editor" rows="10"
-                          required>{{ old('content', $page->content) }}</textarea>
+                <textarea name="content" class="form-control" id="editor" rows="10" required>{{ old('content', $page->content) }}</textarea>
             </div>
 
             <div class="mb-3">
@@ -34,13 +33,14 @@
                 <input type="file" name="image" class="form-control">
 
                 @if ($page->image)
-                    <img src="{{  asset($page->image)}}" alt="Page Image" class="img-thumbnail mt-2"
-                         style="max-width: 200px;">
+                    <img src="{{ asset($page->image) }}" alt="Page Image" class="img-thumbnail mt-2"
+                        style="max-width: 200px;">
                 @endif
             </div>
 
             <div class="modal-footer px-0">
-                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ route('pages.index') }}"><button class="btn btn-secondary" type="button"
+                        data-bs-dismiss="modal">Cancel</button></a>
                 <button class="btn btn-primary" type="submit">Update Page</button>
             </div>
         </form>

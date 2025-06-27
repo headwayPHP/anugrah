@@ -22,7 +22,7 @@ use App\Http\Controllers\SocialMediaPostController;
 
 
 Route::post('login', [AuthController::class, 'login'])->name('post.login');
-Route::get('404',function(){
+Route::get('404', function () {
     return view('frontend.pages.404');
 });
 Route::get('login', [AuthController::class, 'loginForm'])->name('login');
@@ -51,6 +51,8 @@ Route::get('/activity-page', [FrontController::class, 'activityPage'])->name('ac
 Route::get('/activity-page/{id}', [FrontController::class, 'showActivityDetails'])->name('front.activity.details');
 Route::get('courses', [FrontController::class, 'coursePage'])->name('coursePage');
 Route::get('courses/{id}', [FrontController::class, 'courseDetailPage'])->name('courseDetailPage');
+
+Route::post('/attendances/calendar-data', [AttendanceController::class, 'calendarData'])->name('attendances.calendarData');
 
 
 // Route::get('/', [AdminController::class, 'home'])->name('admin.home');

@@ -15,6 +15,113 @@ class AttendanceController extends Controller
     /**
      * Show the attendance management page with batches and students.
      */
+    // public function index(Request $request)
+    // {
+    //     $batches = Batch::all();
+    //     $batchId = $request->batch_id;
+    //     $attendanceDate = $request->attendance_date ?? Carbon::today()->toDateString();
+
+    //     $students = [];
+    //     if ($batchId) {
+    //         $students = Student::where('batch_id', $batchId)->where('status','1')->get();
+    //     }
+
+    //     $events = Attendance::all()->map(function($attendance) {
+    //         return [
+    //             'title' => 'Present - ' . $attendance->student->name,
+    //             'start' => $attendance->attendance_date,
+    //             'color' => '#28a745'
+    //         ];
+    //     });
+
+    //     return view('admin.attendances.index', compact('batches', 'students', 'batchId', 'attendanceDate','events'));
+    // }
+
+
+
+    // public function index(Request $request)
+    // {
+    //     $batches = Batch::all();
+    //     $batchId = $request->batch_id;
+    //     $attendanceDate = $request->attendance_date ?? Carbon::today()->toDateString();
+
+    //     $students = [];
+    //     $events = [];
+
+    //     if ($batchId) {
+    //         $students = Student::where('batch_id', $batchId)->where('status', '1')->get();
+
+    //         $totalStudents = $students->count();
+
+    //         $attendanceSummary = Attendance::select('attendance_date', DB::raw('count(*) as present_count'))
+    //             ->where('batch_id', $batchId)
+    //             ->where('status', 1) // only present
+    //             ->groupBy('attendance_date')
+    //             ->get();
+
+    //         $events = $attendanceSummary->map(function ($row) use ($totalStudents) {
+    //             return [
+    //                 'title' => "{$row->present_count}/{$totalStudents} Present",
+    //                 'start' => $row->attendance_date,
+    //                 'color' => '#007bff',
+    //             ];
+    //         });
+    //     }
+
+    //     return view('admin.attendances.index', compact('batches', 'students', 'batchId', 'attendanceDate', 'events'));
+    // }
+
+
+    //    public function index(Request $request)
+    //    {
+    //        $batches = Batch::all();
+    //        $batchId = $request->batch_id;
+    //        $attendanceDate = $request->attendance_date ?? Carbon::today()->toDateString();
+    //
+    //        $students = [];
+    //        if ($batchId) {
+    //            $students = Student::where('batch_id', $batchId)
+    //                ->with(['attendances' => function($query) use ($attendanceDate) {
+    //                    $query->where('attendance_date', $attendanceDate);
+    //                }])
+    //                ->get();
+    //        }
+    //
+    //        // Get all attendance records with student names for the calendar
+    //        $attendances = Attendance::when($batchId, function($query) use ($batchId) {
+    //            $query->where('batch_id', $batchId);
+    //        })
+    //            ->with('student')
+    //            ->get();
+    //
+    //        // Group by date for counts and student lists
+    //        $groupedAttendances = $attendances->groupBy('attendance_date');
+    //
+    //        $events = $groupedAttendances->map(function($items, $date) {
+    //            $studentNames = $items->map(function($attendance) {
+    //                return $attendance->student->name;
+    //            })->implode(', ');
+    //
+    //            return [
+    //                'title' => $items->count() . ' Present',
+    //                'start' => $date,
+    //                'color' => '#28a745',
+    //                'extendedProps' => [
+    //                    'count' => $items->count(),
+    //                    'students' => $studentNames
+    //                ]
+    //            ];
+    //        })->values();
+    //
+    //        return view('admin.attendances.index', compact(
+    //            'batches',
+    //            'students',
+    //            'batchId',
+    //            'attendanceDate',
+    //            'events'
+    //        ));
+    //    }
+
     public function index(Request $request)
     {
         $batches = Batch::all();
@@ -22,79 +129,84 @@ class AttendanceController extends Controller
         $attendanceDate = $request->attendance_date ?? Carbon::today()->toDateString();
 
         $students = [];
+        $events = [];
+
         if ($batchId) {
-            $students = Student::where('batch_id', $batchId)->where('status','1')->get();
+            $students = Student::where('batch_id', $batchId)->where('status', '1')->get();
+
+            $totalStudents = $students->count();
+
+            $attendanceSummary = Attendance::select('attendance_date', DB::raw('count(*) as present_count'))
+                ->where('batch_id', $batchId)
+                ->where('status', 1) // only present
+                ->groupBy('attendance_date')
+                ->get();
+
+            $events = $attendanceSummary->map(function ($row) use ($totalStudents) {
+                return [
+                    'title' => "{$row->present_count}/{$totalStudents} Present",
+                    'start' => $row->attendance_date,
+                    'color' => '#007bff',
+                    'extendedProps' => [
+                        'present_count' => $row->present_count,
+                        'total_students' => $totalStudents
+                    ]
+                ];
+            });
         }
 
-        $events = Attendance::all()->map(function($attendance) {
+        return view('admin.attendances.index', compact('batches', 'students', 'batchId', 'attendanceDate', 'events'));
+    }
+    public function calendarData(Request $request)
+    {
+        $request->validate([
+            'batch_id' => 'required|exists:batches,id'
+        ]);
+
+        $students = Student::where('batch_id', $request->batch_id)
+            ->where('status', '1')
+            ->get();
+
+        $totalStudents = $students->count();
+
+        // Add date range filtering if provided
+        $query = Attendance::where('batch_id', $request->batch_id)
+            ->where('status', 1); // only present
+
+        if ($request->has('start') && $request->has('end')) {
+            $query->whereBetween('attendance_date', [
+                $request->input('start'),
+                $request->input('end')
+            ]);
+        }
+
+        $attendanceSummary = $query->select('attendance_date', DB::raw('count(*) as present_count'))
+            ->groupBy('attendance_date')
+            ->get();
+
+        $events = $attendanceSummary->map(function ($row) use ($totalStudents) {
             return [
-                'title' => 'Present - ' . $attendance->student->name,
-                'start' => $attendance->attendance_date,
-                'color' => '#28a745'
+                'title' => "{$row->present_count}/{$totalStudents} Present",
+                'start' => $row->attendance_date,
+                'color' => $row->present_count == $totalStudents ? '#28a745' : ($row->present_count > $totalStudents / 2 ? '#007bff' : '#dc3545'),
+                'extendedProps' => [
+                    'present_count' => $row->present_count,
+                    'total_students' => $totalStudents
+                ]
             ];
         });
 
-        return view('admin.attendances.index', compact('batches', 'students', 'batchId', 'attendanceDate','events'));
+        return response()->json($events);
     }
-
-//    public function index(Request $request)
-//    {
-//        $batches = Batch::all();
-//        $batchId = $request->batch_id;
-//        $attendanceDate = $request->attendance_date ?? Carbon::today()->toDateString();
-//
-//        $students = [];
-//        if ($batchId) {
-//            $students = Student::where('batch_id', $batchId)
-//                ->with(['attendances' => function($query) use ($attendanceDate) {
-//                    $query->where('attendance_date', $attendanceDate);
-//                }])
-//                ->get();
-//        }
-//
-//        // Get all attendance records with student names for the calendar
-//        $attendances = Attendance::when($batchId, function($query) use ($batchId) {
-//            $query->where('batch_id', $batchId);
-//        })
-//            ->with('student')
-//            ->get();
-//
-//        // Group by date for counts and student lists
-//        $groupedAttendances = $attendances->groupBy('attendance_date');
-//
-//        $events = $groupedAttendances->map(function($items, $date) {
-//            $studentNames = $items->map(function($attendance) {
-//                return $attendance->student->name;
-//            })->implode(', ');
-//
-//            return [
-//                'title' => $items->count() . ' Present',
-//                'start' => $date,
-//                'color' => '#28a745',
-//                'extendedProps' => [
-//                    'count' => $items->count(),
-//                    'students' => $studentNames
-//                ]
-//            ];
-//        })->values();
-//
-//        return view('admin.attendances.index', compact(
-//            'batches',
-//            'students',
-//            'batchId',
-//            'attendanceDate',
-//            'events'
-//        ));
-//    }
     /**
      * Load the students for the given date and batch.
      */
     public function loadStudents(Request $request)
     {
-//        $request->validate([
-//            'attendance_date' => 'required|date',
-//            'batch_id' => 'required|integer'
-//        ]);
+        //        $request->validate([
+        //            'attendance_date' => 'required|date',
+        //            'batch_id' => 'required|integer'
+        //        ]);
 
         // Format the attendance_date to ensure it's in the correct format
         $attendanceDate = Carbon::parse($request->attendance_date)->format('Y-m-d'); // Ensure it's in Y-m-d format
@@ -130,7 +242,7 @@ class AttendanceController extends Controller
      */
     public function markAttendance(Request $request)
     {
-//        dd($request->all());
+        //        dd($request->all());
         $attendanceDate = $request->attendance_date;
         $batchId = $request->batch_id;
         $studentId = $request->student_id;
@@ -147,11 +259,11 @@ class AttendanceController extends Controller
                 'status' => 1 // Mark as present
             ]);
 
-//            return redirect()->back()->with('success', 'Attendance marked successfully.');
+            //            return redirect()->back()->with('success', 'Attendance marked successfully.');
             return response()->json(['success' => true, 'message' => 'Successfully marked.']);
         }
 
-//        return redirect()->back()->with('error', 'Attendance already marked for this student on this date.');
+        //        return redirect()->back()->with('error', 'Attendance already marked for this student on this date.');
 
         return response()->json(['success' => false, 'message' => 'Attendance not found']);
     }
@@ -199,5 +311,4 @@ class AttendanceController extends Controller
 
         return redirect()->back();
     }
-
 }

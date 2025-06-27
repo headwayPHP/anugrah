@@ -509,6 +509,8 @@
     --falcon-progressbar-width: 100%
 }
 
+
+
 @media (min-width: 992px) {
     :root.double-top-nav-layout, [data-bs-theme=light].double-top-nav-layout {
         --falcon-top-nav-height: 8.688rem
@@ -1293,6 +1295,8 @@
         scroll-behavior: smooth
     }
 }
+
+
 
 body {
     margin: 0;

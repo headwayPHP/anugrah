@@ -7,6 +7,7 @@ use App\Models\Batch;
 use App\Models\ContactRequest;
 use App\Models\Course;
 use App\Models\Page;
+use App\Models\Setting;
 use App\Models\SocialMediaPost;
 use Illuminate\Http\Request;
 use App\Models\Photo;
@@ -16,10 +17,12 @@ use Illuminate\Support\Facades\Validator;
 class FrontController extends Controller
 {
 
-    public function homePage() {
+    public function homePage()
+    {
         return view('frontend.pages.index');
     }
-    public function contactRequestPage() {
+    public function contactRequestPage()
+    {
         return view('frontend.pages.contact-us');
     }
     public function saveContactRequest(Request $request)
@@ -45,11 +48,12 @@ class FrontController extends Controller
 
         ]);
 
-        return redirect()->back()->with('success','successfully submitted the form');
+        return redirect()->back()->with('success', 'successfully submitted the form');
     }
 
 
-    public function regRequestPage() {
+    public function regRequestPage()
+    {
         return view('frontend.pages.register');
     }
 
@@ -86,60 +90,62 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Successfully submitted the form.');
     }
 
-    public function galleryPage() {
+    public function galleryPage()
+    {
         $photos = Photo::where('status', '1')->get(); // optionally filter for featured
 
         return view('frontend.pages.gallery', compact('photos'));
     }
 
-    public function aboutUsPage() {
+    public function aboutUsPage()
+    {
         $about = Page::where('id', 4)->first(); // Use first() to get a single record
+        $yt_link = Setting::where('name', 'about_yt_url')->first();
 
-        return view('frontend.pages.about-us', compact('about'));
+        return view('frontend.pages.about-us', compact('about', 'yt_link'));
     }
 
-    public function privacyPage() {
+    public function privacyPage()
+    {
         $privacy = Page::where('id', 3)->first(); // Use first() to get a single record
 
         return view('frontend.pages.privacy-policy', compact('privacy'));
     }
 
-    public function specificPage($id) {
-        $privacy = Page::where('id',$id)->first();
+    public function specificPage($id)
+    {
+        $privacy = Page::where('id', $id)->first();
         return view('frontend.pages.privacy-policy', compact('privacy'));
     }
 
     public  function activityPage()
     {
 
-        $activities = Activity::where('status','1')->get();
-//        dd($activities);
+        $activities = Activity::where('status', '1')->get();
+        //        dd($activities);
         return view('frontend.pages.activity', compact('activities'));
     }
     public function showActivityDetails($id)
     {
 
-        $activity = Activity::where('id',$id)->first();
-//        dd($activity);
+        $activity = Activity::where('id', $id)->first();
+        //        dd($activity);
         return view('frontend.pages.activity-details', compact('activity'));
     }
 
     public function  coursePage()
     {
-        $courses = Course::where('status','1')->get();
+        $courses = Course::where('status', '1')->get();
 
-        return view('frontend.pages.courses',compact('courses'));
+        return view('frontend.pages.courses', compact('courses'));
     }
 
     public function courseDetailPage($id)
     {
 
-        $course = Course::where('id',$id)->first();
-        $batches = Batch::where('course_id',$id)->get();
-//        dd($activity);
-        return view('frontend.pages.course-details', compact('course','batches'));
+        $course = Course::where('id', $id)->first();
+        $batches = Batch::where('course_id', $id)->get();
+        //        dd($activity);
+        return view('frontend.pages.course-details', compact('course', 'batches'));
     }
-
-
-
 }

@@ -9,7 +9,8 @@
                 <div class="col-lg-12 d-flex align-items-center justify-content-between">
                     <div class="header__logo">
                         <div class="logo">
-                            <a href="{{route('front.home')}}"><img src="{{asset('assets/images/logo/logo2.png')}}" alt="" width="100"></a>
+                            <a href="{{ route('front.home') }}"><img src="{{ asset('assets/images/logo/logo2.png') }}"
+                                    alt="" width="100"></a>
                         </div>
                     </div>
                     <div class="header-right">
@@ -17,60 +18,60 @@
                             <nav class="navigation-menu">
                                 <ul>
                                     <li class="has-children has-children--multilevel-submenu">
-                                        <a href="{{route('front.home')}}"><span>Home</span></a>
+                                        <a href="{{ route('front.home') }}"><span>Home</span></a>
 
                                     </li>
                                     <li class="has-children">
                                         <a href="{{ route('aboutUsPage') }}"><span>About</span></a>
                                     </li>
                                     <li class="has-children">
-                                        <a href="{{route('coursePage')}}"><span>Courses</span></a>
+                                        <a href="{{ route('coursePage') }}"><span>Courses</span></a>
                                     </li>
                                     <li class="has-children has-children--multilevel-submenu">
-                                        <a href="{{route('activityPage')}}"><span>Activities</span></a>
+                                        <a href="{{ route('activityPage') }}"><span>Activities</span></a>
                                         <!-- <ul class="submenu">
                                             <li><a href="it-services.html"><span>IT Services</span></a></li>
                                         </ul> -->
                                     </li>
                                     <li class="has-children has-children--multilevel-submenu">
-                                        <a href="{{route('galleryPage')}}"><span>Gallary</span></a>
-{{--                                        <ul class="submenu">--}}
-{{--                                            <li><a href="causes.html"><span>Causes</span></a></li>--}}
-{{--                                            <li><a href="gallery.html"><span>Gallery</span></a></li>--}}
-{{--                                            <li><a href="mission-and-vision.html"><span>Mission & Vision</span></a></li>--}}
-{{--                                            <li><a href="causes-details.html"><span>Causes Details</span></a></li>--}}
-{{--                                            <li><a href="events-details.html"><span>Events Details</span></a></li>--}}
-{{--                                        </ul>--}}
+                                        <a href="{{ route('galleryPage') }}"><span>Gallary</span></a>
+                                        {{--                                        <ul class="submenu"> --}}
+                                        {{--                                            <li><a href="causes.html"><span>Causes</span></a></li> --}}
+                                        {{--                                            <li><a href="gallery.html"><span>Gallery</span></a></li> --}}
+                                        {{--                                            <li><a href="mission-and-vision.html"><span>Mission & Vision</span></a></li> --}}
+                                        {{--                                            <li><a href="causes-details.html"><span>Causes Details</span></a></li> --}}
+                                        {{--                                            <li><a href="events-details.html"><span>Events Details</span></a></li> --}}
+                                        {{--                                        </ul> --}}
                                     </li>
                                     <li class="has-children">
-                                        <a href="{{route('contactRequestPage')}}"><span>Contact</span></a>
+                                        <a href="{{ route('contactRequestPage') }}"><span>Contact</span></a>
                                     </li>
-{{--                                    <li class="has-children">--}}
-{{--                                        <a href="{{route('regRequestPage')}}"><span>Register</span></a>--}}
-{{--                                    </li>--}}
+                                    {{--                                    <li class="has-children"> --}}
+                                    {{--                                        <a href="{{route('regRequestPage')}}"><span>Register</span></a> --}}
+                                    {{--                                    </li> --}}
                                     <li class="has-children">
-                                        <a href="{{route('login')}}"><span>Login</span></a>
+                                        <a href="{{ route('login') }}"><span>Login</span></a>
                                     </li>
-{{--                                    <li class="has-children has-children--multilevel-submenu">--}}
-{{--                                        <a href="#"><span>Others</span></a>--}}
-{{--                                        <ul class="submenu">--}}
-{{--                                            <li><a href="{{ route('login') }}"><span>Login</span></a></li>--}}
-{{--                                            @php--}}
-{{--                                                $pages = \App\Models\Page::where('status','1')->get();--}}
-{{--                                            @endphp--}}
-{{--                                            @foreach ($pages as $page)--}}
-{{--                                                @if ($page->id != 4)--}}
-{{--                                                    <li>--}}
-{{--                                                        <a href="{{ route('frontend.specific.page', $page->id) }}">--}}
-{{--                                                            <span>{{ $page->title }}</span>--}}
-{{--                                                        </a>--}}
-{{--                                                    </li>--}}
-{{--                                                @endif--}}
-{{--                                            @endforeach--}}
+                                    {{--                                    <li class="has-children has-children--multilevel-submenu"> --}}
+                                    {{--                                        <a href="#"><span>Others</span></a> --}}
+                                    {{--                                        <ul class="submenu"> --}}
+                                    {{--                                            <li><a href="{{ route('login') }}"><span>Login</span></a></li> --}}
+                                    {{--                                            @php --}}
+                                    {{--                                                $pages = \App\Models\Page::where('status','1')->get(); --}}
+                                    {{--                                            @endphp --}}
+                                    {{--                                            @foreach ($pages as $page) --}}
+                                    {{--                                                @if ($page->id != 4) --}}
+                                    {{--                                                    <li> --}}
+                                    {{--                                                        <a href="{{ route('frontend.specific.page', $page->id) }}"> --}}
+                                    {{--                                                            <span>{{ $page->title }}</span> --}}
+                                    {{--                                                        </a> --}}
+                                    {{--                                                    </li> --}}
+                                    {{--                                                @endif --}}
+                                    {{--                                            @endforeach --}}
 
 
-{{--                                        </ul>--}}
-{{--                                    </li>--}}
+                                    {{--                                        </ul> --}}
+                                    {{--                                    </li> --}}
 
                                 </ul>
 
@@ -88,10 +89,10 @@
                             <i></i>
                         </div>
                     </div>
-{{--                    <button class="btn single-by-ticket-btn"><a href="{{route('regRequestPage')}}">Register</a></button>--}}
+                    {{--                    <button class="btn single-by-ticket-btn"><a href="{{route('regRequestPage')}}">Register</a></button> --}}
 
                     <div class="ht-btn-area ">
-                        <a href="{{route('regRequestPage')}}" class="hero-btn">Register</a>
+                        <a href="{{ route('regRequestPage') }}" class="hero-btn">Register</a>
                     </div>
 
                 </div>

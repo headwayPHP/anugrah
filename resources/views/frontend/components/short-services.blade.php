@@ -1,5 +1,5 @@
 <!-- ======== Service Area Start ========== -->
-<div class="service-area section-space--ptb_120 service-top-banner">
+<div class="service-area section-space--pb_120 service-top-banner">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

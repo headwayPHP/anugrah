@@ -67,40 +67,40 @@ class SettingsController extends Controller
 
 
     // Update settings
-//    public function update(Request $request)
-//    {
-//        $request->validate([
-//            'name' => 'required|string|max:255',
-//            'value' => 'required|string|max:255',
-//            'status' => 'required|in:0,1',
-//            'group' => 'required|string|max:255',
-//            'desc' => 'nullable|string',
-//            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Handle image upload
-//        ]);
-//
-//        // Loop through all the settings and update them
-//        foreach ($request->input('settings') as $id => $data) {
-//            $setting = Setting::findOrFail($id);
-//
-//            // If a new logo is uploaded, store it and save the path
-//            if ($request->hasFile('logo')) {
-//                $logoPath = $request->file('logo')->store('logos', 'public'); // Store logo in the 'public/logos' directory
-//                $data['logo'] = $logoPath; // Assign the stored path to the data array
-//            }
-//
-//            // Update setting
-//            $setting->update([
-//                'name' => $data['name'],
-//                'value' => $data['value'],
-//                'status' => $data['status'],
-//                'group' => $data['group'],
-//                'desc' => $data['desc'] ?? null,
-//                'logo' => $data['logo'] ?? $setting->logo, // Keep the existing logo if not updated
-//            ]);
-//        }
-//
-//        return redirect()->route('settings.edit')->with('success', 'Settings updated successfully.');
-//    }
+    //    public function update(Request $request)
+    //    {
+    //        $request->validate([
+    //            'name' => 'required|string|max:255',
+    //            'value' => 'required|string|max:255',
+    //            'status' => 'required|in:0,1',
+    //            'group' => 'required|string|max:255',
+    //            'desc' => 'nullable|string',
+    //            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Handle image upload
+    //        ]);
+    //
+    //        // Loop through all the settings and update them
+    //        foreach ($request->input('settings') as $id => $data) {
+    //            $setting = Setting::findOrFail($id);
+    //
+    //            // If a new logo is uploaded, store it and save the path
+    //            if ($request->hasFile('logo')) {
+    //                $logoPath = $request->file('logo')->store('logos', 'public'); // Store logo in the 'public/logos' directory
+    //                $data['logo'] = $logoPath; // Assign the stored path to the data array
+    //            }
+    //
+    //            // Update setting
+    //            $setting->update([
+    //                'name' => $data['name'],
+    //                'value' => $data['value'],
+    //                'status' => $data['status'],
+    //                'group' => $data['group'],
+    //                'desc' => $data['desc'] ?? null,
+    //                'logo' => $data['logo'] ?? $setting->logo, // Keep the existing logo if not updated
+    //            ]);
+    //        }
+    //
+    //        return redirect()->route('settings.edit')->with('success', 'Settings updated successfully.');
+    //    }
 
     // Show form for creating a new setting
     public function create()
@@ -109,65 +109,65 @@ class SettingsController extends Controller
     }
 
     // Store a newly created setting
-//    public function store(Request $request)
-//    {
-//        // Validation rules
-//        $validator = Validator::make($request->all(), [
-//            'name' => 'required|string|max:255',
-//            'value' => 'required|string|max:255', // General validation for value
-//            'status' => 'required|in:0,1',
-//            'group' => 'required|string|max:255',
-//            'desc' => 'nullable|string',
-//            'input_type' => 'required|in:text,image,pdf,video,link', // Validation for input types
-//            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,mp4,avi|max:10240', // Validation for file upload
-//        ]);
-//
-//        // Check if validation fails
-//        if ($validator->fails()) {
-//            return redirect()->back()
-//                ->withInput()  // Retain the previous input values
-//                ->withErrors($validator)  // Return validation errors
-//                ->with('error', 'Failed to submit the form. Please check your input.');
-//        }
-//
-//        // Retrieve the input type (either 'text', 'image', 'pdf', 'video', or 'link')
-//        $inputType = $request->input('input_type');
-//        $value = '';
-//
-//        // Handle different input types
-//        if ($inputType == 'image' && $request->hasFile('file')) {
-//            // Handle image upload
-//            $filePath = $request->file('file')->store('uploads/images', 'public');
-//            $value = $filePath; // Store the file path for image
-//        } elseif ($inputType == 'pdf' && $request->hasFile('file')) {
-//            // Handle PDF upload
-//            $filePath = $request->file('file')->store('uploads/pdfs', 'public');
-//            $value = $filePath; // Store the file path for PDF
-//        } elseif ($inputType == 'video' && $request->hasFile('file')) {
-//            // Handle video upload
-//            $filePath = $request->file('file')->store('uploads/videos', 'public');
-//            $value = $filePath; // Store the file path for video
-//        } elseif ($inputType == 'link') {
-//            // For link, store the URL directly
-//            $value = $request->input('value'); // Assuming the user provides a link in 'value'
-//        } else {
-//            // If the input type is 'text', simply use the provided 'value'
-//            $value = $request->input('value');
-//        }
-//
-//        // Create a new setting in the database
-//        Setting::create([
-//            'name' => $request->name,
-//            'value' => $value,
-//            'status' => $request->status,
-//            'group' => $request->group,
-//            'desc' => $request->desc,
-//            'input_type' => $inputType, // Store the selected input type (text, image, pdf, video, link)
-//        ]);
-//
-//        // Redirect with success message
-//        return redirect()->route('settings.create')->with('success', 'New setting added successfully.');
-//    }
+    //    public function store(Request $request)
+    //    {
+    //        // Validation rules
+    //        $validator = Validator::make($request->all(), [
+    //            'name' => 'required|string|max:255',
+    //            'value' => 'required|string|max:255', // General validation for value
+    //            'status' => 'required|in:0,1',
+    //            'group' => 'required|string|max:255',
+    //            'desc' => 'nullable|string',
+    //            'input_type' => 'required|in:text,image,pdf,video,link', // Validation for input types
+    //            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,mp4,avi|max:10240', // Validation for file upload
+    //        ]);
+    //
+    //        // Check if validation fails
+    //        if ($validator->fails()) {
+    //            return redirect()->back()
+    //                ->withInput()  // Retain the previous input values
+    //                ->withErrors($validator)  // Return validation errors
+    //                ->with('error', 'Failed to submit the form. Please check your input.');
+    //        }
+    //
+    //        // Retrieve the input type (either 'text', 'image', 'pdf', 'video', or 'link')
+    //        $inputType = $request->input('input_type');
+    //        $value = '';
+    //
+    //        // Handle different input types
+    //        if ($inputType == 'image' && $request->hasFile('file')) {
+    //            // Handle image upload
+    //            $filePath = $request->file('file')->store('uploads/images', 'public');
+    //            $value = $filePath; // Store the file path for image
+    //        } elseif ($inputType == 'pdf' && $request->hasFile('file')) {
+    //            // Handle PDF upload
+    //            $filePath = $request->file('file')->store('uploads/pdfs', 'public');
+    //            $value = $filePath; // Store the file path for PDF
+    //        } elseif ($inputType == 'video' && $request->hasFile('file')) {
+    //            // Handle video upload
+    //            $filePath = $request->file('file')->store('uploads/videos', 'public');
+    //            $value = $filePath; // Store the file path for video
+    //        } elseif ($inputType == 'link') {
+    //            // For link, store the URL directly
+    //            $value = $request->input('value'); // Assuming the user provides a link in 'value'
+    //        } else {
+    //            // If the input type is 'text', simply use the provided 'value'
+    //            $value = $request->input('value');
+    //        }
+    //
+    //        // Create a new setting in the database
+    //        Setting::create([
+    //            'name' => $request->name,
+    //            'value' => $value,
+    //            'status' => $request->status,
+    //            'group' => $request->group,
+    //            'desc' => $request->desc,
+    //            'input_type' => $inputType, // Store the selected input type (text, image, pdf, video, link)
+    //        ]);
+    //
+    //        // Redirect with success message
+    //        return redirect()->route('settings.create')->with('success', 'New setting added successfully.');
+    //    }
 
     public function store(Request $request)
     {
@@ -225,5 +225,4 @@ class SettingsController extends Controller
 
         return redirect()->route('settings.edit')->with('success', 'New setting added successfully.');
     }
-
 }
